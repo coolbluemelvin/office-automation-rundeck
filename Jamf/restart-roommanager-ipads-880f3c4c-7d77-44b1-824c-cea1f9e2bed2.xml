@@ -1,0 +1,35 @@
+<joblist>
+  <job>
+    <context>
+      <options preserveOrder='true'>
+        <option name='jamf_token' secure='true' value='Q29vbGJsdWVTdXBlckFkbWluOmVkaWN0LVA4el8mcg==' valueExposed='true'>
+          <description>Jamf API token  </description>
+        </option>
+      </options>
+    </context>
+    <defaultTab>nodes</defaultTab>
+    <description>Restarts all RoomManager iPads.</description>
+    <executionEnabled>true</executionEnabled>
+    <group>Jamf</group>
+    <id>880f3c4c-7d77-44b1-824c-cea1f9e2bed2</id>
+    <loglevel>INFO</loglevel>
+    <name>restart-roommanager-ipads</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <script><![CDATA[curl --location --request GET "https://coolblue.jamfcloud.com/JSSResource/mobiledevices" \
+--header "Authorization: Basic $RD_OPTION_JAMF_TOKEN" \
+--header "Accept: application/xml"]]></script>
+        <scriptargs />
+      </command>
+      <command>
+        <script><![CDATA[curl --location --request GET 'https://coolblue.jamfcloud.com/JSSResource/computers' \
+--header 'Authorization: Basic Q29vbGJsdWVTdXBlckFkbWluOmVkaWN0LVA4el8mcg==' \
+--header 'Accept: application/xml']]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>880f3c4c-7d77-44b1-824c-cea1f9e2bed2</uuid>
+  </job>
+</joblist>
